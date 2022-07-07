@@ -1,0 +1,28 @@
+.inicio {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .logo {
+    @media (orientation: landscape) {
+      $card-size: 60vh;
+      $padding: $card-size / 7.5;
+      height: $card-size;
+      width: $card-size;
+      padding: $padding;
+      border-radius: calc(($card-size + ($padding * 2)) / 2);
+    }
+    @media (orientation: portrait) {
+      $card-size: 60vw;
+      $padding: $card-size / 7.5;
+      height: $card-size;
+      width: $card-size;
+      padding: $padding;
+      border-radius: calc(($card-size + ($padding * 2)) / 2);
+    }
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+}

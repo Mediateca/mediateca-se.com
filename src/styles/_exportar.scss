@@ -1,0 +1,32 @@
+@use "sass:map";
+@use "./tema" as mse-tema;
+
+// Listado de colores que se exportan
+$colores: (
+  colorLighter: mse-tema.$mse-lighter,
+  colorDarker: mse-tema.$mse-darker,
+);
+
+// Extrae los colores de una paleta y lo incorpora al map
+@function crea-lista($lista, $paleta, $tipo) {
+  @each $nombre, $valor in $paleta {
+    @if $nombre != "contrast" {
+      $elemento: "color" + $tipo + $nombre;
+      $lista: map.set($lista, $elemento, $valor);
+    }
+  }
+  @return $lista;
+}
+
+// Incorpora los colores de las paletas para que sean exportados en <body>
+$colores: crea-lista($colores, mse-tema.$paleta-azul, "Primario");
+$colores: crea-lista($colores, mse-tema.$paleta-naranja, "Acento");
+$colores: crea-lista($colores, mse-tema.$paleta-rojo, "Advertencia");
+
+// Genera variables CSS para los colores
+@function nombre-propiedad($nombre) {
+  @return "--" + $nombre;
+}
+@mixin define-nombre-propiedad($nombre, $valor) {
+  #{nombre-propiedad($nombre)}: $valor;
+}

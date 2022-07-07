@@ -1,0 +1,18 @@
+@use "sass:map";
+@use "@angular/material" as mat;
+@use "./tema" as mse-tema;
+@use "./estilos" as mse-estilos;
+
+@mixin estilo($tema) {
+  .mat-card {
+    @include mse-estilos.fondo-traslucido(mse-tema.$mse-lighter);
+    @include mse-estilos.sombra("drop", null);
+  }
+}
+
+@mixin tema($tema) {
+  $color-config: mat.get-color-config($tema);
+  @if $color-config != null {
+    @include estilo($tema);
+  }
+}

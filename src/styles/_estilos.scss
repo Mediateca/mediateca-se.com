@@ -1,0 +1,27 @@
+// Módulos SASS
+@use "sass:color";
+
+// Colores base
+$sombra-arrojada: #1f2687; // rgb(31,38,135)
+
+// Variables neomorfistas
+$var-fondo: 10%;
+$var-inset: 30%;
+
+@mixin fondo-traslucido($color) {
+  background: linear-gradient(145deg, rgba($color, 0.15), rgba($color, 0.25)), url("../assets/fondo/fondo-ruido.svg");
+}
+
+@mixin sombra($tipo, $color) {
+  @if $tipo == "inset" {
+    box-shadow: inset 0px 4px 16px rgba($sombra-arrojada, 0.25) !important;
+  }
+  @if $tipo == "drop" {
+    box-shadow: 0px 8px 32px rgba($sombra-arrojada, 0.37) !important;
+    backdrop-filter: blur(4px);
+  }
+  @if $color != null {
+    box-shadow: inset 4px 4px 8px color.scale($color, $blackness: $var-inset),
+      inset -4px -4px 8px color.scale($color, $lightness: $var-inset);
+  }
+}
